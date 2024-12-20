@@ -1,0 +1,54 @@
+Quiz 4 answers:
+
+question 1: correct: 
+-> Separate the data into distinct groups by similarity
+
+question 2: correct: 
+-> Decision trees are easy to interpret and visualize
+-> Decision trees often require less preprocessing of data
+
+question 3: correct
+-> To improve generalization by reducing correlation among the trees and making the model more robust to bias.
+
+question 4: incorrect
+-> K-Nearest Neighbors (KNN)
+-> Neural Networks
+-> Support Vector Machines
+-> Regularized logistic regression
+
+question 5: correct
+-> For predicting income over time from future sales of a new product, linear regression would be a better choice than a k-nearest neighbors regressor.
+-> For a model that won’t overfit a training set, Naive Bayes would be a better choice than a decision tree.
+
+question 6: correct
+-> 1. Neural Network; 2. KNN (k=1); 3. Decision Tree
+
+question 7: correct
+Accuracy: The number of correct predictions made divided by the total number of predictions made.
+
+Depth 1: (3796 + 3408) / 8124 = 0.886755
+Depth 2: (3760 + 512 + 3408 + 72) / 8124 = 0.954209
+Depth_2 - Depth_1 = 0.06745 = accuracy
+
+
+question 8: correct
+-> Remove variables that a model in production wouldn’t have access to
+-> Sanity check the model with an unseen validation set
+-> Perform a feature importance analysis on a fitted model
+-> If time is a factor, remove any data related to the event of interest that doesn’t take place prior to the event.
+
+question 9: correct
+-> x1	 : 0, 0, 1, 1
+-> x2	 : 0, 1, 0, 1
+-> output: 0, 1, 1, 0
+
+for eg input: x1 = 1, x2 = 1
+h1: x1 * 2 + x2 * 2 = 4 > 1? => 1
+h2: x1 * -2 + x2 * -2 = -4 > -3? => 0
+h3: h1 * 2 + h2 * 2 = 2 > 3? => 0
+
+question 10: incorrect
+-> Typically the number of weak estimators (n_estimators) parameter is adjusted first to best exploit computational resources, followed by other key parameters such as the boosting learning rate (learning_rate).
+-> Training gradient boosted decision trees usually requires significant computation and careful parameter tuning.
+-> Like decision trees, gradient boosted decision trees easily handle a mixture of feature types.
+-> Gradient boosted decision trees have often achieved among the best ‘off the shelf’ results on many prediction problems with structured data.
