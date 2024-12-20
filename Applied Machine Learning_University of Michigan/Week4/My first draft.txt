@@ -1,0 +1,37 @@
+def engagement_model():
+    # YOUR CODE HERE
+ 
+    # Step 1: Load the data
+    train_data = pd.read_csv('assets/train.csv')
+    test_data = pd.read_csv('assets/test.csv')
+
+    # Step 2: Preprocessing
+    X_train = train_data.drop(columns=['engagement'])
+    y_train = train_data['engagement']
+
+    # Feature Scaling
+    scaler = MinMaxScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+
+    # Step 3: Model Training (Using Random Forest Classifier as an example)
+    model = RandomForestClassifier(n_estimators=100, random_state=888)
+    model.fit(X_train_scaled, y_train)
+
+    # Step 4: Hyperparameter Tuning (Optional)
+    # Perform grid search or random search for hyperparameter tuning if needed.
+
+    # Step 5: Predictions on the test set
+    X_test = test_data
+    X_test_scaled = scaler.transform(X_test)
+
+    # Predict probabilities of engagement
+    predictions = model.predict_proba(X_test_scaled)[:, 1]  # We want the probability for the positive class (engaged)
+
+    # Step 6: Format the output
+    results = pd.Series(predictions, index=test_data['id'], name='engagement')
+
+    return results
+
+    raise NotImplementedError()
+    
+engagement_model()
