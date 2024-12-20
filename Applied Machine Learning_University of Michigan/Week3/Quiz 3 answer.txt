@@ -1,0 +1,127 @@
+Question 5:
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import precision_recall_curve
+import numpy as np
+
+# When creating a Precision-Recall curve, you can use either decision function scores or probabilities
+# Depending on the output of your model and the problem you're working on. 
+# Use probabilities for Precision-Recall curve if underlying is LogisticRegression model. 
+y_proba_lr = m.predict_proba(X_test)[:, 1] # m is already an fitted LogisticRegression model
+# For example, if you have a binary classification problem (2 classes: 0 and 1)
+# predict_proba will return an array of shape (n_samples, 2), where:
+# The first column (index 0) contains the probabilities for the negative class (class 0).
+# The second column (index 1) contains the probabilities for the positive class (class 1).
+
+precision, recall, thresholds = precision_recall_curve(y_test, y_proba_lr) 
+plt.figure()
+plt.plot(precision, recall, label='Precision-Recall Curve')
+plt.xlabel('Precision', fontsize=16)
+plt.ylabel('Recall', fontsize=16)
+
+plt.legend(loc='lower right', fontsize=8)
+plt.grid(True)
+plt.show()
+
+Question 8:
+
+from sklearn.metrics import precision_score
+
+# Make predictions on the test set
+y_pred = m.predict(X_test)
+
+# Calculate micro precision score
+micro_precision = precision_score(y_test, y_pred, average='micro')
+
+# Output the micro precision score
+print('Micro-averaged precision = {:.2f} (treat instances equally)'.format(micro_precision))
+
+Question 13:
+
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import precision_score, recall_score
+from sklearn.model_selection import train_test_split
+
+# Define the parameter grid for C and gamma
+grid_values = {'C': [0.01, 0.1, 1, 10], 'gamma': [0.01, 0.1, 1, 10]}
+
+# Perform grid search with recall as the metric
+grid_clf = GridSearchCV(m, param_grid=grid_values, scoring='recall')
+grid_clf.fit(X_train, y_train)
+
+# Access the best model with the best hyperparameters
+best_model = grid_clf.best_estimator_
+
+# Make predictions on the test set
+y_pred = best_model.predict(X_test)
+
+# Calculate precision and recall on the test set
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+
+# Compute the difference between recall and precision
+recall_minus_precision = recall - precision
+
+# Print the results
+print("Best model: {}".format(grid_clf.best_estimator_))
+print("Best parameters: {}".format(grid_clf.best_params_))
+print("Best recall score: {}".format(grid_clf.best_score_))
+print("Precision: {:.3f}".format(precision))
+print("Recall: {:.3f}".format(recall))
+print("Recall - Precision: {:.3f}".format(recall_minus_precision))
+
+Question 14:
+
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import precision_score, recall_score
+from sklearn.model_selection import train_test_split
+
+# Define the parameter grid for C and gamma
+grid_values = {'C': [0.01, 0.1, 1, 10], 'gamma': [0.01, 0.1, 1, 10]}
+
+# Perform grid search with recall as the metric
+grid_clf = GridSearchCV(m, param_grid=grid_values, scoring='precision')
+grid_clf.fit(X_train, y_train)
+
+# Access the best model with the best hyperparameters
+best_model = grid_clf.best_estimator_
+
+# Make predictions on the test set
+y_pred = best_model.predict(X_test)
+
+# Calculate precision and recall on the test set
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+
+# Compute the difference between precision and recall
+precision_minus_recall = precision - recall
+
+# Print the results
+print("Best model: {}".format(grid_clf.best_estimator_))
+print("Best parameters: {}".format(grid_clf.best_params_))
+print("Best recall score: {}".format(grid_clf.best_score_))
+print("Precision: {:.3f}".format(precision))
+print("Recall: {:.3f}".format(recall))
+print("Recall - Precision: {:.3f}".format(precision_minus_recall))
+
+
+Qn 1) correct - 0.95
+Qn 2) correct - 0.843
+Qn 3) correct - 0.858
+Qn 4) correct - 0.645
+Qn 5) correct - 0.62
+Qn 6) correct - Model 1: Roc 1, Model 2: Roc3, Model 3: Roc2
+Qn 7) correct - Not enough information is given
+Qn 8) correct - 0.744
+Qn 10) correct - Precision
+Qn 11) correct - Recall
+Qn 12) correct - The model is probably misclass the infrequent lables more than frequent labels
+Qn 13) correct - 0.52
+Qn 14) correct - 0.15
+
+Qn 9) Which of the following is true of the R-Squared regression score metric? (Select all that apply)
+-A model that always predicts the mean of y would get a score of 0.0
+-The highest possible score is 1.0
+-The score can sometimes be negative.
